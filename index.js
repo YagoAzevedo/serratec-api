@@ -93,7 +93,7 @@ const addMateria = (request, response) => {
       }
       response
         .status(201)
-        .json({ status: "success", message: "Aluno adicionado." });
+        .json({ status: "success", message: "Matéria adicionada." });
     }
   );
 };
@@ -113,7 +113,7 @@ const editMateria = (request, response) => {
       }
       response
         .status(204)
-        .json({ status: "success", message: "Aluno editado." });
+        .json({ status: "success", message: "Matéria editada." });
     }
   );
 };
@@ -130,7 +130,7 @@ const removeMateria = (request, response) => {
       }
       response
         .status(202)
-        .json({ status: "success", message: "Aluno deletado." });
+        .json({ status: "success", message: "Matéria deletada." });
     }
   );
 };
