@@ -49,7 +49,7 @@ const editAluno = (request, response) => {
         throw error;
       }
       response
-        .status(204)
+        .status(200)
         .json({ status: "success", message: "Aluno editado." });
     }
   );
