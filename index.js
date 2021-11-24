@@ -112,7 +112,7 @@ const editMateria = (request, response) => {
         throw error;
       }
       response
-        .status(204)
+        .status(200)
         .json({ status: "success", message: "Matéria editada." });
     }
   );
