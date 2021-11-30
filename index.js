@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const { pool } = require("./config");
-// require('dotenv').config()
 
 const app = express();
 
@@ -138,6 +137,71 @@ const removeMateria = (request, response) => {
 const health = (request, response) => {
   response.status(200).json("Serviço funcionando!");
 };
+
+const getUsuario = (request, response) => {
+  pool.query("SELECT * FROM usuarios", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+const addUsuario = (request, response) => {
+  console.log(request.body);
+  const { nome, email, senha } = request.body;
+
+  pool.query(
+    `INSERT INTO usuarios (nome, email, senha) VALUES ('${nome}', '${email}', '${senha}')`,
+    (error) => {
+      if (error) {
+        throw error;
+      }
+      response
+        .status(201)
+        .json({ status: "success", message: "Usuário adicionado." });
+    }
+  );
+};
+
+const editUsuario = (request, response) => {
+  console.log(request.body);
+  const { id, nome, email } = request.body;
+
+  pool.query(
+    `update usuarios set
+      nome = '${nome}',
+      email = '${email}'
+     where id = ${id}`,
+    (error) => {
+      if (error) {
+        throw error;
+      }
+      response
+        .status(200)
+        .json({ status: "success", message: "Usuário editado." });
+    }
+  );
+};
+
+const logar = (request, response) => {
+  const { email, senha } = request.body;
+
+  pool.query(`SELECT * FROM usuarios where email = '${email}' and senha = '${senha}' `, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows[0]);
+  });
+}
+
+app.
+  route("/usuario")
+  .post(getUsuario)
+  .put(editUsuario)
+  .get(addUsuario)
+
+app.route("/logar").post(logar);
 
 app
   .route("/alunos")
