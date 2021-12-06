@@ -201,9 +201,9 @@ const logar = (request, response) => {
 
 app.
   route("/usuario")
-  .post(getUsuario)
+  .post(addUsuario)
   .put(editUsuario)
-  .get(addUsuario)
+  .get(getUsuario)
 
 app.route("/logar").post(logar);
 
